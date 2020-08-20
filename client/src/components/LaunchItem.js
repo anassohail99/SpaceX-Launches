@@ -5,6 +5,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Button, Box } from "@material-ui/core";
+import Moment from "react-moment";
+import { Link } from "react-router-dom";
 
 const LaunchItem = ({
   launch: { flight_number, mission_name, launch_date_local, launch_success },
@@ -25,7 +27,6 @@ const LaunchItem = ({
   });
 
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Fragment>
@@ -38,15 +39,22 @@ const LaunchItem = ({
                 {mission_name}
               </span>
             </Typography>
-            <Typography variant="p">Date: {launch_date_local}</Typography>
+            <Typography variant="p">
+              Date:{" "}
+              <Moment format="YYYY-MM-DD HH:mm">{launch_date_local}</Moment>
+            </Typography>
 
             <Typography variant="body2"></Typography>
           </CardContent>
         </Box>
         <CardActions style={{ marginRight: 10 }}>
-          <Button size="large" style={{ color: "#757475" }}>
+          <Link
+            to={`/launch/${flight_number}`}
+            size="large"
+            style={{ color: "#757475" }}
+          >
             Launch Details
-          </Button>
+          </Link>
         </CardActions>
       </Card>
       <br />
